@@ -54,6 +54,7 @@ public class ServidorNomes {
 							while (leitura.hasNext()) {
 								if (coordenador == -1) {
 									coordenador = eleicaoNovoCoordenador(processos);
+									processos.get(coordenador).println("Você novo coordenador");
 								}
 								String texto = leitura.nextLine();
 								System.err.println(texto);
