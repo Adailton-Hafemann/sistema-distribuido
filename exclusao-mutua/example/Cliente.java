@@ -17,11 +17,12 @@ public class Cliente {
 //			String nick = teclado.nextLine();
 
 			PrintStream escrita = new PrintStream(cliente.getOutputStream());
-
+			//manda mensagem para o servidor
+			escrita.println("Preciso do recurso 13");
 			new Thread() {
 				public void run() {
 					try {
-						Scanner leitura = new Scanner(cliente.getInputStream());
+						Scanner leitura = new Scanner(cliente.getInputStream());			
 
 						while (leitura.hasNext()) {
 							System.err.println(leitura.nextLine());
