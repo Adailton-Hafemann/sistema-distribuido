@@ -7,10 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class ServidorNomes {
-
+public class ServidorNomes {		
+	
 	public static int buscaNovoIdProcesso() {
 		Random gerador = new Random();
 		return gerador.nextInt(10000);
@@ -25,12 +29,13 @@ public class ServidorNomes {
 		Collections.sort(listaIds);
 		return listaIds.get(0).intValue();
 	}
-
-	public static void main(String[] args) {
-		HashMap<Integer, PrintStream> processos = new HashMap<>();				
-		
+	
+	public static void startServer() {
+		HashMap<Integer, PrintStream> processos = new HashMap<>();
+		Coordenador coordenador = new Coordenador();
+		coordenador.removeCoordenador();		
 		try {
-			
+
 			ServerSocket servidor = new ServerSocket(9999);
 			System.out.println("Servidor nomes lendo a porta 9999");
 
@@ -39,7 +44,6 @@ public class ServidorNomes {
 
 				new Thread() {
 					public void run() {
-						int coordenador = -1;
 						System.out.println("Cliente conectou: " + socket.getInetAddress().getHostName());
 
 						try {
@@ -52,9 +56,9 @@ public class ServidorNomes {
 							novoProcesso.println(novoId);
 							Scanner leitura = new Scanner(socket.getInputStream());
 							while (leitura.hasNext()) {
-								if (coordenador == -1) {
-									coordenador = eleicaoNovoCoordenador(processos);
-									processos.get(coordenador).println("Você novo coordenador");
+								if (coordenador.getId() == -1) {
+									coordenador.setId(eleicaoNovoCoordenador(processos));
+									processos.get(coordenador.getId()).println("Você novo coordenador");
 								}
 								String texto = leitura.nextLine();
 								System.err.println(texto);
@@ -75,7 +79,9 @@ public class ServidorNomes {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
+	public static void main(String[] args) {
+		startServer();		
+	}
 }

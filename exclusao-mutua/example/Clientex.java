@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Cliente {
+public class Clientex {
 
 	public static void main(String[] args) {
 		try {
@@ -18,7 +18,7 @@ public class Cliente {
 
 			PrintStream escrita = new PrintStream(cliente.getOutputStream());
 			//manda mensagem para o servidor
-			escrita.println("Preciso do recurso 13");
+			escrita.println("Preciso do recurso 19");
 			new Thread() {
 				public void run() {
 					try {
