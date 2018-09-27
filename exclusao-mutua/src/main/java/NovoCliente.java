@@ -1,9 +1,11 @@
 
-public class NovoCliente {
+public class NovoCliente implements Runnable{
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	@Override
+	public void run() {
+		System.out.println("Iniciou");
+		Cliente cliente = new Cliente();
+		cliente.iniciaNovoCliente();
 	}
 
 }

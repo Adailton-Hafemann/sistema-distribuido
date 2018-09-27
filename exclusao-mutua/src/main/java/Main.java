@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 	
 	private static ScheduledExecutorService executor;
-	private static Cliente clientes = new Cliente();
+	private static NovoCliente clientes = new NovoCliente();
 	
     public static void main(String[] args) {
     	Routines routine = new Routines();    	
