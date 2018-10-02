@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class ServidorNomes {
@@ -85,8 +86,10 @@ public class ServidorNomes {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void main(String[] args) {
-		startServer();
+		Coordenador coorde = new Coordenador();
+		coorde.coordenador();
 	}
+	
 }
